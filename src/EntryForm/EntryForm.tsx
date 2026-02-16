@@ -26,7 +26,7 @@ export default function EntryForm({ formEntry }: Props): JSX.Element {
         (_prevFormError: FormError, formData: FormData): FormError => {
             try {
                 const entryName = formData.get('entry')
-                if (entryName === null) return "No input can be found. Please try again."
+                if (entryName === null || entryName === "") return "No input can be found. Please try again."
 
                 const newItem: Item = {
                     id: items.length,
