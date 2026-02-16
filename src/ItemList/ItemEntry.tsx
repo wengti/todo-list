@@ -7,23 +7,28 @@ import { clsx } from 'clsx';
 import { saveItemsToLocalStorage } from "../utilsFunc/localStorage";
 import PlaceholderFilteredEntry from "./PlaceholderFilteredEntry";
 import type { DropZoneEl, SetDisplayType } from "./ItemList";
-import type { Item, SetItems } from "../Layout/Main";
+import { useItemsContext, type Item } from "../Layout/Main";
 import DropZone from "./DropZone";
 
 type Props = {
     filteredItems: Item[]
-    setItems: SetItems
     setDisplayType: SetDisplayType
     dropZoneEl: React.RefObject<DropZoneEl[]>
 }
 
 
 
-export default function ItemEntry({ filteredItems, setItems, setDisplayType, dropZoneEl }: Props): JSX.Element[] {
+export default function ItemEntry({ filteredItems, setDisplayType, dropZoneEl }: Props): JSX.Element[] {
+
+    /* Context */
+    const [_items, setItems] = useItemsContext()
+    const isLightMode = useLightModeContext()
 
     // Key Note:
     // When destructuring [...ArrayOfObjects] 
-    // => This may have created a new array, but the objects still point to the same objects
+    // => This may have created a new array, but the objects still point to the same objects 
+
+    /* Functions: Handle Actions */
     function toggleItemStatus(itemId: number): undefined {
         setItems((prevItems: Item[]): Item[] => {
             const newItems: Item[] = prevItems.map((prevItem: Item): Item => {
@@ -49,23 +54,21 @@ export default function ItemEntry({ filteredItems, setItems, setDisplayType, dro
         })
     }
 
-    function handleDragStart(event: React.DragEvent<HTMLDivElement>, itemId: number): void{
-        dropZoneEl.current.forEach((elemObj) => {elemObj.element.classList.add('drag-active')} )
+    /* Functions: Handle Drag and Drop */
+    function handleDragStart(event: React.DragEvent<HTMLDivElement>, itemId: number): void {
+        dropZoneEl.current.forEach((elemObj) => { elemObj.element.classList.add('drag-active') })
         event.dataTransfer.setData('text/plain', String(itemId))
     }
 
-    function handleDragEnd(): void{
-        dropZoneEl.current.forEach((elemObj) => {elemObj.element.classList.remove('drag-active')} )
+    function handleDragEnd(): void {
+        dropZoneEl.current.forEach((elemObj) => { elemObj.element.classList.remove('drag-active') })
     }
 
-    // Light Context
-    const isLightMode = useLightModeContext()
-
-    // Return elements via mapping
+    /* Return elements via mapping */
     if (filteredItems.length > 0) {
         return filteredItems.map((item: Item, idx: number): JSX.Element => {
 
-            // Class Name
+            /* Class Name */
             const todoDivClsName = clsx({
                 'todo-div': true,
                 'bottom-border': true,
@@ -85,14 +88,14 @@ export default function ItemEntry({ filteredItems, setItems, setDisplayType, dro
             })
 
             return (
-                <div 
-                    key={item.id} 
-                    className='todo-outer-div' 
-                    draggable='true' 
-                    onDragStart={(event)=>{handleDragStart(event, item.id)}}
-                    onDragEnd={()=>{handleDragEnd()}}
+                <div
+                    key={item.id}
+                    className='todo-outer-div'
+                    draggable='true'
+                    onDragStart={(event) => { handleDragStart(event, item.id) }}
+                    onDragEnd={() => { handleDragEnd() }}
                 >
-                    <DropZone setItems={setItems} itemId={item.id} dropZoneEl={dropZoneEl}/>
+                    <DropZone itemId={item.id} dropZoneEl={dropZoneEl} />
                     <div className={todoDivClsName} >
                         <button
                             type='button'
@@ -112,7 +115,7 @@ export default function ItemEntry({ filteredItems, setItems, setDisplayType, dro
         })
     }
     else {
-        return [<PlaceholderFilteredEntry setDisplayType={setDisplayType} key='placeholder'/>]
+        return [<PlaceholderFilteredEntry setDisplayType={setDisplayType} key='placeholder' />]
     }
 
 }

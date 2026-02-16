@@ -4,7 +4,7 @@ import {  saveLightModeToLocalStorage } from "../utilsFunc/localStorage";
 import clsx from "clsx";
 import type { SetIsLightMode } from "../App";
 
-
+/* Type */
 type Props = {
     isLightMode: boolean
     setIsLightMode: SetIsLightMode
@@ -12,7 +12,7 @@ type Props = {
 
 export default function Header({isLightMode, setIsLightMode}: Props): JSX.Element {
 
-    // function 
+    /* Function  */
     function toggleLightMode(): void {
         setIsLightMode((prevIsLightMode: boolean): boolean => {
             saveLightModeToLocalStorage(!prevIsLightMode)
@@ -20,11 +20,13 @@ export default function Header({isLightMode, setIsLightMode}: Props): JSX.Elemen
         })
     }
 
+    /* Class Names */
     const LightModeBtnClsName = clsx({
         'light-mode-btn': true,
         'light-light-mode-btn': isLightMode
     })
 
+    /* Returned Elements */
     return (
         <header>
             <h1 className='page-title'>TODO</h1>

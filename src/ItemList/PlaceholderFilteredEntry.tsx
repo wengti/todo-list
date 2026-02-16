@@ -10,10 +10,10 @@ type Props = {
 
 export default function PlaceholderFilteredEntry({setDisplayType}:Props ): JSX.Element {
 
-    // useLightContext
+    /* useLightContext */
     const isLightMode = useLightModeContext()
 
-    // ClassName
+    /* ClassName */
     const toDoDivClsName = clsx({
         'todo-div': true,
         'smooth-edge-top': true,

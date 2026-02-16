@@ -9,10 +9,10 @@ type Props = {
 
 export default function PlaceholderEntry({ formEntry }: Props): JSX.Element {
 
-    // useLightContext
+    /* Context */
     const isLightMode = useLightModeContext()
 
-    // ClassName
+    /* ClassName */
     const toDoDivClsName = clsx({
         'todo-div': true,
         'smooth-edge-top': true,

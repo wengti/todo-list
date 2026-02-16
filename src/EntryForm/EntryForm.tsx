@@ -5,21 +5,20 @@ import ErrorMsg from './ErrorMsg'
 import { useLightModeContext } from '../App'
 import { saveItemsToLocalStorage } from '../utilsFunc/localStorage'
 import clsx from 'clsx'
-import type { Item, SetItems } from '../Layout/Main'
+import { useItemsContext, type Item} from '../Layout/Main'
 
 type Props = {
-    items: Item[]
-    setItems: SetItems
     formEntry: React.RefObject<HTMLInputElement>
 }
 
 export type FormError = null | Error | String
 
 
-export default function EntryForm({ items, setItems, formEntry }: Props): JSX.Element {
+export default function EntryForm({ formEntry }: Props): JSX.Element {
 
     /* Use Context */
     const isLightMode = useLightModeContext()
+    const [items, setItems] = useItemsContext()
 
     /* From Action */
     const [formError, formAction, _isPending] = useActionState<FormError, FormData>(

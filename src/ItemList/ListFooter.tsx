@@ -3,25 +3,25 @@ import { useLightModeContext} from '../App'
 import { saveItemsToLocalStorage } from '../utilsFunc/localStorage'
 import type { DisplayType, SetDisplayType } from './ItemList'
 import clsx from 'clsx'
-import type { Item, SetItems } from '../Layout/Main'
+import { useItemsContext, type Item } from '../Layout/Main'
 
+/* Type */
 type Props = {
-    items: Item[]
-    setItems: SetItems
     displayType: DisplayType
     setDisplayType: SetDisplayType
 }
 
 
-export default function ListFooter({items, setItems, displayType, setDisplayType}: Props): JSX.Element{
+export default function ListFooter({displayType, setDisplayType}: Props): JSX.Element{
 
-    // Derived state
+    /* Context */
+    const isLightMode = useLightModeContext()
+    const [items, setItems] = useItemsContext()
+
+    /* Derived state */
     const numActiveItems: number = items.filter( (item: Item): boolean => item.isActive).length
 
-    // Light Mode Context
-    const isLightMode = useLightModeContext()
-
-    // Function
+    /* Function */
     function handleClearCompleted(): void{
         setItems( (prevItems: Item[]): Item[] => {
             const newItems = prevItems.filter( (item: Item):boolean => item.isActive)
@@ -30,11 +30,11 @@ export default function ListFooter({items, setItems, displayType, setDisplayType
         })
     }
 
-    // Derived elements
+    /* Derived elements */
     const availableDisplayType: DisplayType[] = ['all', 'completed', 'active']
     const displayPanel: JSX.Element[] = availableDisplayType.map( (typeStr: DisplayType): JSX.Element => {
 
-        // Class Names
+        /* Class Names */
         const displayPanelCls = clsx({
             'display-panel': true,
             'active-display-type': displayType === typeStr,
@@ -51,9 +51,9 @@ export default function ListFooter({items, setItems, displayType, setDisplayType
         )
     })
 
-    // Returned Element
+    /* Returned Element */
 
-    // ClassName
+    /* ClassName */
     const toDoDivClsName = clsx({
         'todo-div': true,
         'smooth-edge-bottom': true,

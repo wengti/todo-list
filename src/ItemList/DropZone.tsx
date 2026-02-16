@@ -1,15 +1,18 @@
-import type { Item, SetItems } from "../Layout/Main"
+import { useItemsContext, type Item } from "../Layout/Main"
 import type { DropZoneEl } from "./ItemList"
 
 
 type Props = {
-    setItems: SetItems
     itemId: number
     dropZoneEl: React.RefObject<DropZoneEl[]>
 }
 
-export default function DropZone({ setItems, itemId, dropZoneEl }: Props) {
+export default function DropZone({ itemId, dropZoneEl }: Props) {
 
+    /* Context */
+    const [_items, setItems] = useItemsContext()
+
+    /* Function */
     function handleDrop(event: React.DragEvent<HTMLDivElement>, isTop: boolean, dropId: number): void {
         event.preventDefault()
         const dragId = Number(event.dataTransfer.getData('text/plain'))
