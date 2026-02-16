@@ -7,6 +7,7 @@ import { saveItemsToLocalStorage } from '../utilsFunc/localStorage'
 import clsx from 'clsx'
 import { useItemsContext, type Item} from '../Layout/Main'
 
+/* type */
 type Props = {
     formEntry: React.RefObject<HTMLInputElement>
 }
@@ -14,8 +15,8 @@ type Props = {
 export type FormError = null | Error | String
 
 
+/* Elements */
 export default function EntryForm({ formEntry }: Props): JSX.Element {
-
     /* Use Context */
     const isLightMode = useLightModeContext()
     const [items, setItems] = useItemsContext()

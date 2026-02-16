@@ -33,7 +33,7 @@ export default function DropZone({ itemId, dropZoneEl }: Props) {
             if (rawDropObjIdx === -1) return prevItems 
             const dropObjIdx = isTop ? rawDropObjIdx : rawDropObjIdx + 1
 
-            // Add the dragged obejct to its new position relative to the drop zone
+            /* Add the dragged obejct to its new position relative to the drop zone */
             newItems.splice(dropObjIdx, 0, dragObj)
 
             return newItems // Trigger rerendering

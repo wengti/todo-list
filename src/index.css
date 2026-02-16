@@ -82,9 +82,6 @@ header {
     cursor: pointer;
 }
 
-.light-light-mode-btn {
-    color: var(--light-used);
-}
 
 
 /* Main */
@@ -235,16 +232,17 @@ main {
     cursor: pointer;
 }
 
-.active-display-type {
-    color: #536bd7;
-}
 
 .clear-btn {
     cursor: pointer;
     text-align: right;
 }
 
-.clear-btn:active{
+.active-display-type,
+.display-panel:hover,
+.display-panel:active,
+.clear-btn:active,
+.clear-btn:hover{
     color: #536bd7;
 }
 

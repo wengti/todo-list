@@ -33,7 +33,7 @@ export default function App(): JSX.Element {
     return (
         <LightModeContext value={isLightMode}>
             <div className={ContentBodyClsName}>
-                <Header isLightMode={isLightMode} setIsLightMode={setIsLightMode}/>
+                <Header setIsLightMode={setIsLightMode}/>
                 <Main />
                 <div className='banner-img-container'>
                 </div>
