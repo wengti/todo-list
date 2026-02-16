@@ -1,5 +1,5 @@
 
-import { useLightModeContext, type Item, type SetItems } from "../App"
+import { useLightModeContext } from "../App"
 import type { JSX } from "react"
 import { RxCross1 } from "react-icons/rx";
 import { FaCheck } from "react-icons/fa";
@@ -7,6 +7,7 @@ import { clsx } from 'clsx';
 import { saveItemsToLocalStorage } from "../utilsFunc/localStorage";
 import PlaceholderFilteredEntry from "./PlaceholderFilteredEntry";
 import type { SetDisplayType } from "./ItemList";
+import type { Item, SetItems } from "../Layout/Main";
 
 type Props = {
     filteredItems: Item[]

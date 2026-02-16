@@ -1,9 +1,9 @@
 import { useState } from 'react'
 import type { JSX } from 'react'
-import type { Item, SetItems } from '../App'
 import ItemEntry from './ItemEntry'
 import PlaceholderEntry from './PlaceholderEntry'
 import ListFooter from './ListFooter'
+import type { Item, SetItems } from '../Layout/Main'
 
 type Props = {
     items: Item[]

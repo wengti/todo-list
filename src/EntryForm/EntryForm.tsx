@@ -2,9 +2,10 @@
 import type { JSX } from 'react'
 import { useActionState } from 'react'
 import ErrorMsg from './ErrorMsg'
-import { useLightModeContext, type Item, type SetItems } from '../App'
+import { useLightModeContext } from '../App'
 import { saveItemsToLocalStorage } from '../utilsFunc/localStorage'
 import clsx from 'clsx'
+import type { Item, SetItems } from '../Layout/Main'
 
 type Props = {
     items: Item[]

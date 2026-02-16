@@ -1,4 +1,4 @@
-import type { Item } from "../App"
+import type { Item } from "../Layout/Main"
 
 export function saveItemsToLocalStorage(items: Item[]): void{
     localStorage.setItem("todoItems", JSON.stringify(items))

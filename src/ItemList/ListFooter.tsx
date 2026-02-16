@@ -1,8 +1,9 @@
 import type {JSX} from 'react'
-import { useLightModeContext, type Item, type SetItems } from '../App'
+import { useLightModeContext} from '../App'
 import { saveItemsToLocalStorage } from '../utilsFunc/localStorage'
 import type { DisplayType, SetDisplayType } from './ItemList'
 import clsx from 'clsx'
+import type { Item, SetItems } from '../Layout/Main'
 
 type Props = {
     items: Item[]
