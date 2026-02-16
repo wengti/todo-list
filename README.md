@@ -3,6 +3,18 @@
 This project is a simple todo-list, built as an attempt to practice ***React*** and ***Typescript***.
 Visit the implementation here: https://todo-list-vz2n.onrender.com/
 
+<div align='center'>
+    <img src="/demo/demo.png" width="67.4%">
+    <img src="/demo/demo-mobile.png" width="21%">
+</div>
+
+<div align='center'>
+    <img src="/demo/demo-light.png" width="67.4%">
+    <img src="/demo/demo-light-mobile.png" width="21%">
+</div>
+
+
+## Features
 It features the following interactive elements:
 - Adding a todo item to the list 
     - The data is saved in the local storage for persistence
@@ -26,15 +38,7 @@ It features the following interactive elements:
     - If the item is dropped with the cursor pointing at the top half of another item, it will be placed before that item.
     - If the item is dropped with the cursor pointing at the bottom half of another item, it will be placed afterwards that item.
 
-<div align='center'>
-    <img src="/demo/demo.png" width="67.4%">
-    <img src="/demo/demo-mobile.png" width="21%">
-</div>
 
-<div align='center'>
-    <img src="/demo/demo-light.png" width="67.4%">
-    <img src="/demo/demo-light-mobile.png" width="21%">
-</div>
 
 ## Key takeaways
 1. Challenges in implementing drag and drop features.
