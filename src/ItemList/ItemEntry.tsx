@@ -1,21 +1,25 @@
 
 import { useLightModeContext } from "../App"
-import type { JSX } from "react"
+import { type JSX } from "react"
 import { RxCross1 } from "react-icons/rx";
 import { FaCheck } from "react-icons/fa";
 import { clsx } from 'clsx';
 import { saveItemsToLocalStorage } from "../utilsFunc/localStorage";
 import PlaceholderFilteredEntry from "./PlaceholderFilteredEntry";
-import type { SetDisplayType } from "./ItemList";
+import type { DropZoneEl, SetDisplayType } from "./ItemList";
 import type { Item, SetItems } from "../Layout/Main";
+import DropZone from "./DropZone";
 
 type Props = {
     filteredItems: Item[]
     setItems: SetItems
     setDisplayType: SetDisplayType
+    dropZoneEl: React.RefObject<DropZoneEl[]>
 }
 
-export default function ItemEntry({ filteredItems, setItems, setDisplayType }: Props): JSX.Element[] {
+
+
+export default function ItemEntry({ filteredItems, setItems, setDisplayType, dropZoneEl }: Props): JSX.Element[] {
 
     // Key Note:
     // When destructuring [...ArrayOfObjects] 
@@ -45,6 +49,15 @@ export default function ItemEntry({ filteredItems, setItems, setDisplayType }: P
         })
     }
 
+    function handleDragStart(event: React.DragEvent<HTMLDivElement>, itemId: number): void{
+        dropZoneEl.current.forEach((elemObj) => {elemObj.element.classList.add('drag-active')} )
+        event.dataTransfer.setData('text/plain', String(itemId))
+    }
+
+    function handleDragEnd(): void{
+        dropZoneEl.current.forEach((elemObj) => {elemObj.element.classList.remove('drag-active')} )
+    }
+
     // Light Context
     const isLightMode = useLightModeContext()
 
@@ -72,7 +85,14 @@ export default function ItemEntry({ filteredItems, setItems, setDisplayType }: P
             })
 
             return (
-                <div key={item.id}>
+                <div 
+                    key={item.id} 
+                    className='todo-outer-div' 
+                    draggable='true' 
+                    onDragStart={(event)=>{handleDragStart(event, item.id)}}
+                    onDragEnd={()=>{handleDragEnd()}}
+                >
+                    <DropZone setItems={setItems} itemId={item.id} dropZoneEl={dropZoneEl}/>
                     <div className={todoDivClsName} >
                         <button
                             type='button'
@@ -92,7 +112,7 @@ export default function ItemEntry({ filteredItems, setItems, setDisplayType }: P
         })
     }
     else {
-        return [<PlaceholderFilteredEntry setDisplayType={setDisplayType} />]
+        return [<PlaceholderFilteredEntry setDisplayType={setDisplayType} key='placeholder'/>]
     }
 
 }

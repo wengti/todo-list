@@ -104,6 +104,12 @@ main {
 }
 
 /* Todo Div */
+
+/* To accomodate drop zones*/
+.todo-outer-div {
+    position: relative;
+}
+
 .todo-div {
     width: 100%;
     background-color: var(--dark-blue-used);
@@ -113,6 +119,7 @@ main {
     gap: 1em;
     justify-content: center;
     align-items: center;
+
 }
 
 .light-todo-div{
@@ -236,6 +243,31 @@ main {
     cursor: pointer;
     text-align: right;
 }
+
+.clear-btn:active{
+    color: #536bd7;
+}
+
+/* Drop Zone Div */
+.dropzone-div {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    position: absolute;
+    height: 100%;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+}
+
+.half-dropzone-div{
+    height: 50%;
+}
+
+.drag-active{
+    pointer-events: auto;
+}
+
 
 
 /* Footer-hint */
