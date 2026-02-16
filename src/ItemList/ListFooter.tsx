@@ -1,6 +1,5 @@
 import type { JSX } from 'react'
 import { useLightModeContext } from '../App'
-import { saveItemsToLocalStorage } from '../utilsFunc/localStorage'
 import type { DisplayType, SetDisplayType } from './ItemList'
 import clsx from 'clsx'
 import { useItemsContext, type Item } from '../Layout/Main'
@@ -24,8 +23,10 @@ export default function ListFooter({ displayType, setDisplayType }: Props): JSX.
     /* Function */
     function handleClearCompleted(): void {
         setItems((prevItems: Item[]): Item[] => {
-            const newItems = prevItems.filter((item: Item): boolean => item.isActive)
-            saveItemsToLocalStorage(newItems)
+            const newItems = prevItems.map((item: Item): Item => {
+                if(!item.isActive) return {...item, isActive: true}
+                return item
+            })
             return newItems
         })
     }
