@@ -1,5 +1,0 @@
-
-Note:
-1. object of array - destructuring array but object still point to the same thing
-2. drag and drop api guide
-2. how to deal with stacking 2 components with different functions (cannot use bubbling / capturing)
