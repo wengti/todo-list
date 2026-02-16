@@ -1,5 +1,5 @@
-import type {JSX} from 'react'
-import { useLightModeContext} from '../App'
+import type { JSX } from 'react'
+import { useLightModeContext } from '../App'
 import { saveItemsToLocalStorage } from '../utilsFunc/localStorage'
 import type { DisplayType, SetDisplayType } from './ItemList'
 import clsx from 'clsx'
@@ -12,19 +12,19 @@ type Props = {
 }
 
 
-export default function ListFooter({displayType, setDisplayType}: Props): JSX.Element{
+export default function ListFooter({ displayType, setDisplayType }: Props): JSX.Element {
 
     /* Context */
     const isLightMode = useLightModeContext()
     const [items, setItems] = useItemsContext()
 
     /* Derived state */
-    const numActiveItems: number = items.filter( (item: Item): boolean => item.isActive).length
+    const numActiveItems: number = items.filter((item: Item): boolean => item.isActive).length
 
     /* Function */
-    function handleClearCompleted(): void{
-        setItems( (prevItems: Item[]): Item[] => {
-            const newItems = prevItems.filter( (item: Item):boolean => item.isActive)
+    function handleClearCompleted(): void {
+        setItems((prevItems: Item[]): Item[] => {
+            const newItems = prevItems.filter((item: Item): boolean => item.isActive)
             saveItemsToLocalStorage(newItems)
             return newItems
         })
@@ -32,7 +32,7 @@ export default function ListFooter({displayType, setDisplayType}: Props): JSX.El
 
     /* Derived elements */
     const availableDisplayType: DisplayType[] = ['all', 'completed', 'active']
-    const displayPanel: JSX.Element[] = availableDisplayType.map( (typeStr: DisplayType): JSX.Element => {
+    const displayPanel: JSX.Element[] = availableDisplayType.map((typeStr: DisplayType): JSX.Element => {
 
         /* Class Names */
         const displayPanelCls = clsx({
@@ -41,9 +41,9 @@ export default function ListFooter({displayType, setDisplayType}: Props): JSX.El
         })
 
         return (
-            <div 
-                key={typeStr} 
-                onClick={() => {setDisplayType(typeStr)}}
+            <div
+                key={typeStr}
+                onClick={() => { setDisplayType(typeStr) }}
                 className={displayPanelCls}
             >
                 {typeStr[0].toUpperCase() + typeStr.slice(1)}
@@ -61,17 +61,33 @@ export default function ListFooter({displayType, setDisplayType}: Props): JSX.El
         'light-todo-div': isLightMode
     })
 
-    return(
-        <div className={toDoDivClsName}>
-            <div className='side-panel'>
-                {numActiveItems} items left
+    const mobileToDoDivClsName = clsx({
+        'mobile-display-panel': true,
+        'todo-div': true,
+        'smooth-edge-all': true,
+        'list-footer': true,
+        'light-todo-div': isLightMode
+    })
+
+    return (
+        <>
+            <div className={toDoDivClsName}>
+                <div className='side-panel'>
+                    {numActiveItems} items left
+                </div>
+                <div className='display-panel-div'>
+                    {displayPanel}
+                </div>
+                <div className="clear-btn side-panel" onClick={() => { handleClearCompleted() }}>
+                    Clear Completed
+                </div>
             </div>
-            <div className='display-panel-div'>
-                {displayPanel}
+            <div className={mobileToDoDivClsName}>
+                <div className='mobile-display-panel-div'>
+                    {displayPanel}
+                </div>
             </div>
-            <div className="clear-btn side-panel" onClick={() => {handleClearCompleted()}}>
-                Clear Completed
-            </div>
-        </div>
+        </>
+
     )
 }

@@ -9,7 +9,7 @@ type Props = {
 }
 
 export default function Header({setIsLightMode}: Props): JSX.Element {
-
+    
     /* Function  */
     function toggleLightMode(): void {
         setIsLightMode((prevIsLightMode: boolean): boolean => {

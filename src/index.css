@@ -19,7 +19,7 @@ body {
     margin: 0;
 }
 
-.content-body{
+.content-body {
     color: var(--light-used);
     background-color: var(--dark-used);
     font-family: 'Josefin Sans', sans-serif;
@@ -31,7 +31,7 @@ body {
     position: relative;
 }
 
-.light-content-body{
+.light-content-body {
     color: var(--dark-used);
     background-color: var(--light-used);
 }
@@ -51,7 +51,7 @@ h1 {
     z-index: 1;
     background-position: center;
     background-size: cover;
-    background-image: url('/banner.jpg'), linear-gradient(270deg, rgba(221, 27, 224, 1) 0%,rgba(31, 166, 207, 1) 100%);
+    background-image: url('/banner.jpg'), linear-gradient(270deg, rgba(221, 27, 224, 1) 0%, rgba(31, 166, 207, 1) 100%);
     background-blend-mode: multiply;
 }
 
@@ -70,7 +70,7 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-top: 2em;
+    margin-top: 4em;
 }
 
 .page-title {
@@ -119,7 +119,7 @@ main {
 
 }
 
-.light-todo-div{
+.light-todo-div {
     background-color: var(--light-blue-used);
 }
 
@@ -232,7 +232,6 @@ main {
     cursor: pointer;
 }
 
-
 .clear-btn {
     cursor: pointer;
     text-align: right;
@@ -242,7 +241,7 @@ main {
 .display-panel:hover,
 .display-panel:active,
 .clear-btn:active,
-.clear-btn:hover{
+.clear-btn:hover {
     color: #536bd7;
 }
 
@@ -258,14 +257,29 @@ main {
     pointer-events: none;
 }
 
-.half-dropzone-div{
+.half-dropzone-div {
     height: 50%;
 }
 
-.drag-active{
+.drag-active {
     pointer-events: auto;
 }
 
+/* Additional mobile components */
+.mobile-display-panel {
+    margin-top: 1.5em;
+    display: none;
+}
+
+.mobile-display-panel-div {
+    flex: 1;
+    /* As a child */
+    display: flex;
+    /* As a parent */
+    justify-content: center;
+    gap: 0.5em;
+    display: none;
+}
 
 
 /* Footer-hint */
@@ -283,4 +297,23 @@ main {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+/* Mobile design */
+@media (max-width: 768px) {
+    .display-panel-div {
+        display: none;
+    }
+
+    .mobile-display-panel {
+        display: flex;
+    }
+
+    .mobile-display-panel-div {
+        display: flex;
+    }
+
+    .side-panel{
+        flex: 1;
+    }
 }
